@@ -1,0 +1,96 @@
+ .btn {
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    border: none;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .btn-primary {
+    background: #dc3a41;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 0 21px;
+    height: 46px;
+    line-height: 45px;
+  }
+  .btn-primary:not(:disabled):not(.is-disabled):hover {
+    background: #b92f35;
+  }
+  .btn-show-hide {
+    position: absolute;
+    top: 8%;
+    width: auto;
+    right: 6px;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 0 12px;
+    height: 34px;
+    line-height: 34px;
+    color: #fcd275;
+    box-shadow: inset rgb(0 0 0 / 15%) 0 0 0 1px;
+  }
+  
+  .login-method {
+    display: flex;
+    justify-content: center;
+    color:#ffffff;
+    padding-top: 10px;
+
+  }
+  .login-method ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+  }
+
+  .login-method li {
+    display: inline-block;
+    padding: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .login-method li:hover {
+    color: #b92f35;
+  }
+  
+  .login-method-active {
+    border-radius: 5px;
+    background: #fff;
+    color: #dc3a41;
+    -webkit-box-shadow: 0 0 3px 0 rgba(255, 255, 255, 1);
+    box-shadow: 0 0 3px 0 rgba(255, 255, 255, 1);
+  }
+  
+  .dateTimeWrapper {
+    text-align: center;
+    padding-bottom: 10px;
+    font-weight: bold;
+    color: #dc3a41;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+
+  }
+  .clock {
+    font-size: 27px;
+  }
+
+  .prayerTime {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-content: center;
+    padding-bottom: 10px;
+    color: #fff;
+    text-shadow: 0 1px 1px rgb(255, 0, 0);
+  }
+  .prayerTime div {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+
+  }

@@ -1,0 +1,136 @@
+<html>
+<head>
+$(if refresh-timeout)
+<meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+$(endif)
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />   
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<title>Internet hotspot - Status</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/custom.css">
+<style type="text/css">
+    iframe {
+      float: left;
+      height: 22px;
+      width: 100%;
+    }
+  </style>
+<script>
+
+$(if advert-pending == 'yes')
+    var popup = '';
+    function focusAdvert() {
+	if (window.focus) popup.focus();
+    }
+    function openAdvert() {
+	popup = open('$(link-advert)', 'hotspot_advert', '');
+	setTimeout("focusAdvert()", 1000);
+    }
+$(endif)
+    function openLogout() {
+	if (window.name != 'hotspot_status') return true;
+        open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+	window.close();
+	return false;
+    }
+</script>
+<script language="JavaScript">
+    function readablizeBytes(bytes) {
+      var s = ['bytes', 'kb', 'MB', 'GB', 'TB', 'PB'];
+      var e = Math.floor(Math.log(bytes) / Math.log(1024));
+      return (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e];
+    }
+  </script>
+    
+</head>
+<body class="dark" $(if advert-pending == 'yes') onLoad="openAdvert()" $(endif)>
+    <div class="ie-fixMinHeight">
+        <div class="status-main">
+            <div class="wrap">
+                <div class="dateTimeWrapper">
+                    <div class="date"></div>
+                    <div class="clock"></div>
+                </div>
+          
+                  <div class="prayerTime">
+                    <div class="imsak" id="imsak">
+                      <p><strong>Imsak</strong></p>
+                      <p>00:00</p>
+                    </div>
+                    <div class="subuh" id="fajr">
+                      <p><strong>Subuh</strong></p>
+                      <p>00:00</p>
+                    </div>
+                    <div class="zuhur" id="dhuhr">
+                      <p><strong>Zuhur</strong></p>
+                      <p>00:00</p>
+                    </div>
+                    <div class="asar" id="asr">
+                      <p><strong>Asar</strong></p>
+                      <p>00:00</p>
+                    </div>
+                    <div class="magrib" id="maghrib">
+                      <p><strong>Magrib</strong></p>
+                      <p>00:00</p>
+                    </div>
+                    <div class="isya" id="isha">
+                      <p><strong>Isya</strong></p>
+                      <p>00:00</p>
+                    </div>
+                  </div>
+                $(if login-by == 'trial')
+                    <h1>Ciee, Gratisan!</h1>
+                $(elif login-by != 'mac')
+                    <h1>Hai, $(username)!</h1>
+                $(endif)                
+
+                <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+                    <table>
+                        <tr><td>IP address</td><td>$(ip)</td></tr>
+                        <tr><td>MAC address</td><td>$(mac)</td></tr>
+                        <tr><td>Upload</td><td><script>document.write(readablizeBytes($(bytes-in)));</script></td></tr>
+                        <tr><td>Download</td><td><script>document.write(readablizeBytes($(bytes-out)));</script></td></tr>
+                        <tr><td>Sisa Kuota</td><td>$(if remain-bytes-total) <script>document.write(readablizeBytes($(remain-bytes-total)));</script> $(else)Unlimited $(endif)</td></tr>
+                    $(if session-time-left)
+                        <tr><td>Tersisa</td><td id="SisaWaktu" data-secs="$(session-time-left-secs)">$(session-time-left)</td></tr>
+                    $(endif)
+                        <tr><td>Terhubung</td><td id="TerKoneksi" data-secs="$(uptime-secs)">$(uptime)</td></tr>
+                    $(if blocked == 'yes')
+                        <tr><td>Status</td><td>
+                    <a href="$(link-advert)" target="hotspot_advert">Advertisement required</a></td>
+                        </tr>
+                        
+                    $(elif refresh-timeout)
+                        <!--<tr><td>Status refresh</td><td>$(refresh-timeout)</td></tr>-->
+                    $(endif)
+                    
+                    <tr><td>Berakhir Pada</td><td><iframe frameborder="0" scrolling="no"
+                        src="http://10.10.10.10/mikhmon/status/status_mod.php?name=$(username)&session=mazagung">
+                        </iframe></td></tr>
+                        </table>
+                    $(if login-by-mac != 'yes')
+                    <input type="submit" value="Log out">
+                    $(endif)
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+	var time = "$(session-time-left)";
+	time = time.replace(/w/g,'w ').replace(/d/g,'d ').replace(/h/g,'h ').replace(/m/g,'m ').replace(/s/g,'s ');
+	waktu = time.replace(/w /g,'Minggu').replace(/d /g,'Hari').replace(/h /g,'Jam').replace(/m /g,'Menit').replace(/s /g,'Detik');
+	sisawaktu = waktu.replace(/Minggu/g,' mg ').replace(/Hari/g,' hr ').replace(/Jam/g,' jam ').replace(/Menit/g,' mnt ').replace(/Detik/g,' dtk ');
+	document.getElementById("SisaWaktu").innerHTML = sisawaktu; 
+	</script>
+	<script>
+	var kon = "$(uptime)";
+	kon = kon.replace(/w/g,'w ').replace(/d/g,'d ').replace(/h/g,'h ').replace(/m/g,'m ').replace(/s/g,'s ');
+	koneksi = kon.replace(/w /g,'Minggu').replace(/d /g,'Hari').replace(/h /g,'Jam').replace(/m /g,'Menit').replace(/s /g,'Detik');
+	terkon = koneksi.replace(/Minggu/g,' mg ').replace(/Hari/g,' hr ').replace(/Jam/g,' jam ').replace(/Menit/g,' mnt ').replace(/Detik/g,' dtk ');
+	document.getElementById("TerKoneksi").innerHTML = terkon; 
+	</script>
+    <script type="module" src="./js/ramadhanTimes.js"></script>
+</html>
