@@ -2,13 +2,13 @@ const config = {
     loginMethod: {
       member: true,
       voucher: true,
-      qrCode: false,
+      qrCode: true,
       default: "voucher", // member, voucher, qrCode
     },
     qrCodeScannerURL: "https://laksa19.github.io/myqr",
     expiredChecker: {
       active: true,
-      URL: "https://voc.dutatopup.biz.id/mikhmon/status/status_mod.php?name=$(username)&session=PlayNET.ID",
+      URL: "https://domain.com/status/status.php?name=$(username)&session=Session012",
       token: "69ee773d4xxxxxxxx:00628cdxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     },
     prayTime: {
