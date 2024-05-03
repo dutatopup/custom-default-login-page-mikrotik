@@ -262,7 +262,9 @@ table td:first-child {
 }
 
 .dark {
-    background: #343434
+  /*  background: #343434 */
+  background: #0D1117;
+
 }
 
 .dark input[type=submit] {
@@ -280,7 +282,7 @@ table td:first-child {
 }
 
 .dark a {
-    color: #dc3a41
+    color: #ff0000;
 }
 
 .dark table td {
@@ -288,7 +290,8 @@ table td:first-child {
 }
 
 .info.alert {
-    color: #da3d41
+    color: #da3d41;
+
 }
 
 @media (min-width:576px) {
